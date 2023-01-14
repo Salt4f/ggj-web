@@ -1,0 +1,30 @@
+﻿@model Post
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<header class="masthead" style="background-image: url('/images/background.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>@Model.Title</h1>
+                    <h2 class="subheading">@Model.Subtitle</h2>
+                    <span class="meta">
+                        Publicat el dia @Model.PublishedOn!.Value.Day/@Model.PublishedOn!.Value.Month/@Model.PublishedOn!.Value.Year
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                @Html.Raw(Model.PostInfo!.Body)
+            </div>
+        </div>
+    </div>
+</article>
