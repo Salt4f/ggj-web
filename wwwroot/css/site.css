@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*!
-* Based on Start Bootstrap - Clean Blog v6.0.8 (https://startbootstrap.com/theme/clean-blog)
+* Colorful Neon Based by Plopez (https://github.com/plopez01/) based on Start Bootstrap - Clean Blog v6.0.8 (https://startbootstrap.com/theme/clean-blog)
 * Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/master/LICENSE)
 */
@@ -83,6 +83,49 @@
     animation-name: float;
     animation-duration: 10s;
     animation-iteration-count: infinite;
+}
+
+@keyframes alert {
+    0% {
+        color: white;
+    }
+
+    50% {
+        color: rgb(222, 44, 44);
+    }
+
+    100% {
+        color: white;
+    }
+}
+
+.alerting {
+    animation-name: alert;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+#particles-js canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    top: 0;
+    left: 0;
+
+    display: block;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+    -webkit-transition: opacity .8s ease, -webkit-transform 1.4s ease;
+    transition: opacity .8s ease, transform 1.4s ease;
+}
+
+.countdown {
+    text-align: center;
+    font-size: 5em;
+    margin: 0;
 }
 
 *,
@@ -267,7 +310,7 @@ a {
 }
 
     a:hover {
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--bs-secondary)
     }
 
     a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -3165,9 +3208,12 @@ textarea.form-control-lg {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #0085A1;
-    border-color: #0085A1;
+    background-color: var(--bs-primary);
+    -webkit-mask-image: url("/images/Button.svg");
+    mask-image: url("/images/Button.svg");
+    mask-size: cover;
+    border: none;
+    mask-repeat: no-repeat;
 }
 
     .btn-primary:hover {
@@ -11611,7 +11657,7 @@ body {
 
 hr {
     background-color: #dee2e6;
-    opacity: 1;
+    opacity: 0.5;
 }
 
 p {
@@ -11753,6 +11799,8 @@ header.masthead {
     background-color: #6c757d;
     background-size: cover;
     background-attachment: scroll;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
 }
 
     header.masthead:before {
@@ -11763,7 +11811,7 @@ header.masthead {
         right: 0;
         bottom: 0;
         background-color: #212529;
-        opacity: 0.2;
+        opacity: 0.5;
     }
 
     header.masthead .page-heading,
@@ -11838,6 +11886,103 @@ header.masthead {
         }
 
         header.masthead .post-heading .subheading {
+            font-size: 1.875rem;
+        }
+}
+
+header.homehead {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-top: calc(8rem + 57px);
+    padding-bottom: 8rem;
+    background: radial-gradient(circle, rgba(227,23,162,1) 0%, rgba(137,43,130,0.8) 16%, rgba(49,22,90,0.7) 38%, rgba(11,24,40,0.4) 75%, rgba(13,34,59,0.2) 100%);
+    mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+}
+
+    header.homehead:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #212529;
+        opacity: 0.2;
+    }
+
+    header.homehead .page-heading,
+    header.homehead .post-heading,
+    header.homehead .site-heading {
+        color: #fff;
+    }
+
+    header.homehead .page-heading,
+    header.homehead .site-heading {
+        text-align: center;
+    }
+
+        header.homehead .page-heading h1, header.homehead .page-heading .h1,
+        header.homehead .site-heading h1,
+        header.homehead .site-heading .h1 {
+            font-size: 3rem;
+        }
+
+        header.homehead .page-heading .subheading,
+        header.homehead .site-heading .subheading {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            display: block;
+            margin-top: 0.625rem;
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+    header.homehead .post-heading h1, header.homehead .post-heading .h1 {
+        font-size: 2.25rem;
+    }
+
+    header.homehead .post-heading .meta,
+    header.homehead .post-heading .subheading {
+        line-height: 1.1;
+        display: block;
+    }
+
+    header.homehead .post-heading .subheading {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0.75rem 0 2rem;
+        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    header.homehead .post-heading .meta {
+        font-size: 1.25rem;
+        font-weight: 300;
+        font-style: italic;
+        font-family: "Lora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+        header.homehead .post-heading .meta a {
+            color: #fff;
+        }
+
+@media (min-width: 992px) {
+    header.homehead {
+        padding-top: 9rem;
+        padding-bottom: 4rem;
+    }
+
+        header.homehead .page-heading h1, header.homehead .page-heading .h1,
+        header.homehead .site-heading h1,
+        header.homehead .site-heading .h1 {
+            font-size: 5rem;
+        }
+
+        header.homehead .post-heading h1, header.homehead .post-heading .h1 {
+            font-size: 3.5rem;
+        }
+
+        header.homehead .post-heading .subheading {
             font-size: 1.875rem;
         }
 }
