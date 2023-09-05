@@ -1,0 +1,70 @@
+﻿@model HomeModel
+
+@{
+    ViewData["Title"] = "Admin Panel";
+    Layout = "_AdminLayout";
+}
+
+<header id="particles-js" class="adminhead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1 style="font-family:'Chalk_Mark'">Admin Mode</h1>
+
+                    <form asp-controller="Admin" asp-action="Update" method="post">
+                        <div class="mb-3">
+                            <label asp-for="JamStart" class="subheading"><strong>Data d'inici de la gamejam:</strong></label>
+                            <br />
+                            <input asp-for="JamStart" id="jamDate" class="dark" type="datetime-local" style="scale: 2"/>
+                        </div>
+                        
+                        <br />
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            @foreach (var post in Model.posts)
+            {
+                <div class="post-preview">
+                    <a asp-area="" asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                        <h2 class="post-title">@post.Title</h2>
+                        @if (post.Subtitle != null)
+                        {
+                            <h3 class="post-subtitle">@post.Subtitle</h3>
+                        }
+                    </a>
+                    <p class="post-meta">
+                        Publicat el dia @post.PublishedOn!.Value.Day/@post.PublishedOn!.Value.Month/@post.PublishedOn!.Value.Year
+                    </p>
+                </div>
+                <hr class="my-4" />
+            }
+            @{
+                string? pageNumber;
+                try
+                {
+                    pageNumber = Context.Request.Query["page"] == Microsoft.Extensions.Primitives.StringValues.Empty ? "1" : (int.Parse(Context.Request.Query["page"].First()!) + 1).ToString();
+                } catch
+                {
+                    pageNumber = "1";
+                }
+            }
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" asp-route-page="@pageNumber">Publicacions anteriors →</a></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const jamDate = document.getElementById('jamDate');
+
+    jamDate.value =  "@Model.JamStart!.Value.ToString("yyyy-MM-ddTHH:mm")";
+</script>
+

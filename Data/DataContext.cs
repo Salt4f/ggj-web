@@ -19,6 +19,7 @@ namespace GGJWeb.Data
                 .UseSnakeCaseNamingConvention();
         }
 
+        public DbSet<HomeModel> Home { get; set; }
         public DbSet<Post>? Posts { get; set; }
         public DbSet<PostInfo>? PostInfos { get; set; }
         

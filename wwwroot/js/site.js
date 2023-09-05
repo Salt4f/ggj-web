@@ -22,7 +22,7 @@
         if (minutes.length == 1) minutes = '0' + minutes;
         if (seconds.length == 1) seconds = '0' + seconds;
 
-        if (hours == 0 && !element.classList.contains("alerting")) {
+        if (days == 0 && hours == 0 && !element.classList.contains("alerting")) {
             element.classList.add("alerting");
         }
 
