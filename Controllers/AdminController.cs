@@ -13,11 +13,13 @@ namespace GGJWeb.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly DataContext _context;
+        private readonly IConfiguration _config;
 
-        public AdminController(ILogger<HomeController> logger, DataContext context)
+        public AdminController(ILogger<HomeController> logger, IConfiguration config, DataContext context)
         {
             _logger = logger;
             _context = context;
+            _config = config;
         }
 
         public async Task<IActionResult> Index([FromQuery(Name = "page")] int page)
@@ -40,8 +42,33 @@ namespace GGJWeb.Controllers
             return View(homeModel);
         }
 
+        public async Task<IActionResult> Auth()
+        {
+            return View();
+        }
 
-        // I left it off here, now I gota do the saving to db stuff
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Authenticate([Bind(nameof(AuthData.Password))] AuthData data)
+        {
+            if (ModelState.IsValid)
+            {
+                if (data.Password != _config.GetValue<string>("Password"))
+                {
+                    return Unauthorized();
+                }
+
+
+            }
+            return BadRequest();
+        }
+
+        public class AuthData
+        {
+            [DataType(DataType.Password)]
+            public string? Password { get; set; } 
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update([Bind(nameof(NewHomeData.JamStart), nameof(NewHomeData.SignupLink))] NewHomeData data)

@@ -1,0 +1,32 @@
+﻿@model GGJWeb.Controllers.AdminController.AuthData
+
+@{
+    ViewData["Title"] = "Admin Auth";
+    Layout = "_AdminLayout";
+}
+
+<header class="adminhead">
+    <div id="particles-js"></div>
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1 style="font-family:'Chalk_Mark'">Admin Mode</h1>
+
+                    <form asp-controller="Admin" asp-action="Authenticate" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Password" class="subheading"><strong>Enllaç de registre:</strong></label>
+                            <br />
+                            <input asp-for="Password" class="input-dark" type="url" style="scale: 1.5"/>
+                        </div>
+                        
+                        <br />
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script src="~/js/particles.js" asp-append-version="true"></script>
