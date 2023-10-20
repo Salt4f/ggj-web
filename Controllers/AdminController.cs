@@ -2,6 +2,7 @@
 using GGJWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using static GGJWeb.Controllers.PostController;
@@ -27,12 +28,13 @@ namespace GGJWeb.Controllers
             try
             {
                 homeModel = await _context.Home!.FirstAsync();
-                if (homeModel.JamStart == null) throw new InvalidOperationException("JamStart is Null");
             } catch (InvalidOperationException) {
                 homeModel = new HomeModel();
-                homeModel.JamStart = DateTime.Now.AddDays(7);
-            }
+                DateTime now = DateTime.Now;
 
+                // Remove milliseconds to prevent long datetime-local input
+                homeModel.JamStart = now.Subtract(new TimeSpan(0, 0, 0, 0, now.Millisecond));
+            }
             homeModel.posts = list;
 
             return View(homeModel);
@@ -42,7 +44,7 @@ namespace GGJWeb.Controllers
         // I left it off here, now I gota do the saving to db stuff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update([Bind(nameof(NewHomeData.JamStart))] NewHomeData data)
+        public async Task<IActionResult> Update([Bind(nameof(NewHomeData.JamStart), nameof(NewHomeData.SignupLink))] NewHomeData data)
         {
             if (ModelState.IsValid)
             {
@@ -51,9 +53,23 @@ namespace GGJWeb.Controllers
                 {
                     return Unauthorized();
                 }*/
-                Debug.Print((data.JamStart == null).ToString());
-                var home = new HomeModel { Id = 0, JamStart = data.JamStart };
-                await _context.AddAsync(home);
+                HomeModel homeModel;
+
+                try
+                {
+                    // Modify if entry exists
+                    homeModel = await _context.Home!.FirstAsync();
+                    homeModel.JamStart = DateTime.SpecifyKind(data.JamStart, DateTimeKind.Utc);
+                    homeModel.SignupLink = data.SignupLink;
+                }
+                catch (InvalidOperationException)
+                {
+                    // If not add new one
+                    homeModel = new HomeModel();
+                    homeModel.JamStart = DateTime.SpecifyKind(data.JamStart, DateTimeKind.Utc);
+                    await _context.AddAsync(homeModel);
+                }
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(HomeController.Index), "Admin");
             }
@@ -62,7 +78,8 @@ namespace GGJWeb.Controllers
 
         public class NewHomeData
         {
-            public DateTime? JamStart { get; set; }
+            public string? SignupLink { get; set; }
+            public DateTime JamStart { get; set; }
         }
     }
 }

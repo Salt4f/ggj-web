@@ -44,7 +44,7 @@ namespace GGJWeb.Controllers
                 var post = new Post { Title = info.Title, Subtitle = info.Subtitle, PostInfo = postInfo, PublishedOn = DateTime.UtcNow };
                 await _context.AddAsync(post);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(AdminController.Index), "Admin");
             }
             return BadRequest();
         }

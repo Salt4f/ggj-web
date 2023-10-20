@@ -15,7 +15,7 @@
 
     <script src="https://use.fontawesome.com/releases/v6.2.1/js/all.js" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/2.12.0/tsparticles.bundle.min.js" integrity="sha512-W/UhCgUnBrqWd6HtR1wS+twNkVYvwxB1Hqtm9d/0HOWynEcr7t1BOQn1x55ziHQJtn+tU0Fzih1SAawRr6YFmA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -35,12 +35,12 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 </head>
-<body style="background: linear-gradient(145deg, rgba(100,16,79,1) 27%, rgba(17,17,34,1) 52%, rgba(17,19,38,1) 70%, rgba(14,49,92,1) 100%);">
+<body style="background-image: linear-gradient(145deg, rgba(100,16,79,1) 27%, rgba(17,17,34,1) 52%, rgba(17,19,38,1) 70%, rgba(14,49,92,1) 100%);">
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GGJ Barcelona</a>
             <div class="text-center">
-                <a class="nav-btn px-lg-3 px-2 py-2" href="https://gamejambcn23.eventbrite.es/">Apunta'm-hi!</a>
+                <a class="nav-btn px-lg-3 px-2 py-2" asp-area="" asp-controller="Home" asp-action="Signup">Apunta'm-hi!</a>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -94,6 +94,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -2,26 +2,62 @@
 
 @{
     ViewData["Title"] = "New";
-    Layout = null;
+    Layout = "_AdminPage";
 }
 
 <form asp-controller="Post" asp-action="New" method="post">
-    <div class="mb-3">
-            <label asp-for="Title"></label>
-            <input asp-for="Title" />
+    <header class="masthead" style="background-image: url('/images/background.jpg');">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <label asp-for="Title">Títol del post:</label>
+                    <br />
+                    <input class="input-dark pb-3 w-100" asp-for="Title"/>
+                    <br />
+                     <label asp-for="Subtitle">Subtítol:</label>
+                    <input class="input-dark pb-2 w-100" asp-for="Subtitle" />
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-        <label asp-for="Subtitle"></label>
-        <input asp-for="Subtitle" />
-    </div>
-    <div class="mb-3">
-        <label asp-for="Body"></label>
-        <textarea asp-for="Body"></textarea>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Password"></label>
-        <input asp-for="Password"/>
-    </div>
+</header>
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                
+            </div>
 
+        </div>
+            <br />
+    <br />
+    <div id="editor-container"></div>
+                <textarea id="postBody" style="visibility: hidden" asp-for="Body"></textarea>
+    <label asp-for="Password"></label>
+    <input class="input-dark m-2" asp-for="Password"/>
     <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</article>
 </form>
+
+<script>
+    var postBody = document.querySelector("#postBody");
+
+    var quill = new Quill('#editor-container', {
+        modules: {
+            toolbar: [
+                [{ header: [1, 2, false] }],
+                ['bold', 'italic', 'underline'],
+                ['image', 'code-block']
+            ]
+        },
+        placeholder: 'Introdueix el contingut del post...',
+        theme: 'snow'  // or 'bubble'
+    });
+
+    quill.on('text-change', function() {
+      postBody.value = quill.root.innerHTML;
+
+    });
+</script>

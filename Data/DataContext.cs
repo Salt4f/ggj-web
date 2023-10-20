@@ -1,5 +1,6 @@
 ﻿using GGJWeb.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace GGJWeb.Data
 {
@@ -26,7 +27,7 @@ namespace GGJWeb.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Post>()
-                .HasOne(p => p.PostInfo);
+            .HasOne(p => p.PostInfo);
         }
 
 

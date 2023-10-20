@@ -105,13 +105,15 @@
     animation-iteration-count: infinite;
 }
 
-#particles-js canvas {
+#particles-js {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -10;
     top: 0;
     left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    z-index: 0; /* if you use -1 you have to set to `"window"` the interactivity.detectsOn property */
 
     display: block;
     -webkit-transform: scale(1);
@@ -149,6 +151,7 @@ body {
     color: var(--bs-body-color);
     text-align: var(--bs-body-text-align);
     background-color: var(--bs-body-bg);
+    background-attachment: fixed;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -439,7 +442,7 @@ textarea {
     font-family: Open Sans
 }
 
-input.dark {
+.input-dark {
     background: #2225;
     border: none;
     color: #eee;

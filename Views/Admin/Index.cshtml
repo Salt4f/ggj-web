@@ -5,7 +5,8 @@
     Layout = "_AdminLayout";
 }
 
-<header id="particles-js" class="adminhead">
+<header class="adminhead">
+    <div id="particles-js"></div>
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
@@ -16,7 +17,12 @@
                         <div class="mb-3">
                             <label asp-for="JamStart" class="subheading"><strong>Data d'inici de la gamejam:</strong></label>
                             <br />
-                            <input asp-for="JamStart" id="jamDate" class="dark" type="datetime-local" style="scale: 2"/>
+                            <input asp-for="JamStart" id="jamDate" class="input-dark" type="datetime-local" style="scale: 2"/>
+                            <br />
+                            <br />
+                            <label asp-for="SignupLink" class="subheading"><strong>Enllaç de registre:</strong></label>
+                            <br />
+                            <input asp-for="SignupLink" id="signupLink" class="input-dark" type="url" style="scale: 1.5"/>
                         </div>
                         
                         <br />
@@ -29,8 +35,9 @@
 </header>
 
 <div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="row gx-4 gx-lg-5 justify-content-center align-middle">
         <div class="col-md-10 col-lg-8 col-xl-7">
+            <a type="submit" href="/Post/New" class="btn btn-primary float-end mb-4">+ Add new post</a>
             @foreach (var post in Model.posts)
             {
                 <div class="post-preview">
@@ -57,14 +64,9 @@
                     pageNumber = "1";
                 }
             }
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" asp-route-page="@pageNumber">Publicacions anteriors →</a></div>
+            <!--<div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" asp-route-page="@pageNumber">Publicacions anteriors →</a></div> -->
         </div>
     </div>
 </div>
 
-<script>
-    const jamDate = document.getElementById('jamDate');
-
-    jamDate.value =  "@Model.JamStart!.Value.ToString("yyyy-MM-ddTHH:mm")";
-</script>
-
+<script src="~/js/particles.js" asp-append-version="true"></script>
