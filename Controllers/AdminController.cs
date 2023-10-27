@@ -26,7 +26,7 @@ namespace GGJWeb.Controllers
         {
             var list = await _context.Posts!.OrderByDescending(p => p.PublishedOn).Skip(page * 5).Take(5).ToListAsync();
             HomeModel homeModel;
-
+            
             try
             {
                 homeModel = await _context.Home!.FirstAsync();
@@ -39,6 +39,7 @@ namespace GGJWeb.Controllers
             }
             homeModel.posts = list;
 
+            Debug.WriteLine(HttpContext.Session.Id);
             return View(homeModel);
         }
 
@@ -57,8 +58,10 @@ namespace GGJWeb.Controllers
                 {
                     return Unauthorized();
                 }
-
-
+                Debug.WriteLine(HttpContext.Session.Id);
+                
+                // Redirect to adming page after auth
+                return RedirectToAction(nameof(HomeController.Index), "Admin");
             }
             return BadRequest();
         }

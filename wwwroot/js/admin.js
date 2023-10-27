@@ -6,7 +6,7 @@
         t < i ? t > 0 && s.classList.contains('is-fixed') ? s.classList.add('is-visible') : s.classList.remove('is-visible', 'is-fixed') : (s.classList.remove(['is-visible']), t > e && !s.classList.contains('is-fixed') && s.classList.add('is-fixed')), i = t;
     });
 
-    tsParticles.loadJSON('particles-js', 'particles_admin.json').then(function (p) {
+    tsParticles.loadJSON('particles-js', window.location.origin + '/particles/particles_admin.json').then(function (p) {
         console.log('callback - particles.js config loaded');
     });
 });

@@ -15,18 +15,16 @@
 
                     <form asp-controller="Admin" asp-action="Authenticate" method="post">
                         <div class="mb-3">
-                            <label asp-for="Password" class="subheading"><strong>Enllaç de registre:</strong></label>
+                            <label asp-for="Password" class="subheading"><strong>Contrasenya:</strong></label>
                             <br />
-                            <input asp-for="Password" class="input-dark" type="url" style="scale: 1.5"/>
+                            <input asp-for="Password" class="input-dark" type="password" style="scale: 1.5"/>
                         </div>
                         
                         <br />
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </header>
-
-<script src="~/js/particles.js" asp-append-version="true"></script>
