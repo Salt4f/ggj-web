@@ -1,5 +1,7 @@
 ﻿using GGJWeb.Data;
 using GGJWeb.Models;
+using GGJWeb.Utils;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +17,8 @@ namespace GGJWeb.Controllers
         private readonly DataContext _context;
         private readonly IConfiguration _config;
 
+        private List<string> authTokens;
+
         public AdminController(ILogger<HomeController> logger, IConfiguration config, DataContext context)
         {
             _logger = logger;
@@ -24,6 +28,12 @@ namespace GGJWeb.Controllers
 
         public async Task<IActionResult> Index([FromQuery(Name = "page")] int page)
         {
+            // Return if session is not authorized
+            if ((HttpContext.Session.GetInt32("Authorized") ?? 0) == 0)
+            {
+                return RedirectToAction(nameof(AdminController.Auth), "Admin");
+            }
+
             var list = await _context.Posts!.OrderByDescending(p => p.PublishedOn).Skip(page * 5).Take(5).ToListAsync();
             HomeModel homeModel;
             
@@ -39,7 +49,6 @@ namespace GGJWeb.Controllers
             }
             homeModel.posts = list;
 
-            Debug.WriteLine(HttpContext.Session.Id);
             return View(homeModel);
         }
 
@@ -58,10 +67,15 @@ namespace GGJWeb.Controllers
                 {
                     return Unauthorized();
                 }
-                Debug.WriteLine(HttpContext.Session.Id);
-                
-                // Redirect to adming page after auth
-                return RedirectToAction(nameof(HomeController.Index), "Admin");
+
+                if (HttpContext.Session.IsAvailable)
+                {
+                    // Mark session as authorized, migrate to asp.net auth session when possible
+                    HttpContext.Session.SetInt32("Authorized", 1);
+
+                    // Redirect to adming page after auth
+                    return RedirectToAction(nameof(HomeController.Index), "Admin");
+                } else return RedirectToAction(nameof(HomeController.Index), "Home");
             }
             return BadRequest();
         }
@@ -78,11 +92,12 @@ namespace GGJWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO AUTH
-                /*if (info.Password != _config.GetValue<string>("Password"))
+                // Return if session is not authorized
+                if ((HttpContext.Session.GetInt32("Authorized") ?? 0) == 0)
                 {
                     return Unauthorized();
-                }*/
+                }
+
                 HomeModel homeModel;
 
                 try

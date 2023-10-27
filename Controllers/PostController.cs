@@ -1,5 +1,6 @@
 ﻿using GGJWeb.Data;
 using GGJWeb.Models;
+using GGJWeb.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -34,6 +35,12 @@ namespace GGJWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> New([Bind(nameof(NewPostBody.Title),nameof(NewPostBody.Subtitle),nameof(NewPostBody.Body),nameof(NewPostBody.Password))]NewPostBody info)
         {
+            // Return if session is not authorized
+            if ((HttpContext.Session.GetInt32("Authorized") ?? 0) == 0)
+            {
+                return Unauthorized();
+            }
+
             if (ModelState.IsValid)
             {
                 if (info.Password != _config.GetValue<string>("Password"))
