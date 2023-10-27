@@ -22,11 +22,15 @@
 
     function updateCountdown() {
 
-        let now = new Date().getTime();
+        const localDate = new Date();
+        const utcTime = localDate.getTime() + localDate.getTimezoneOffset() * 60000;
 
-        let mainDist = mainDate - now;
+        const offset = 2; // Spain's timezone offset 
+        const spainTime = utcTime + (3600000 * offset);
 
-        if (mainDate - now > 0) {
+        let mainDist = mainDate - spainTime;
+
+        if (mainDist > 0) {
             mainCountdown.innerText = getTimeFormat(mainCountdown, mainDist);
             setTimeout(updateCountdown, 1000); // Loop
         } else {
