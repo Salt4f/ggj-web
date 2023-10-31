@@ -48,6 +48,7 @@ namespace GGJWeb.Controllers
                 homeModel.JamStart = now.Subtract(new TimeSpan(0, 0, 0, 0, now.Millisecond));
             }
             homeModel.posts = list;
+            homeModel.Page = page;
 
             return View(homeModel);
         }

@@ -50,7 +50,8 @@
                     </a>
                     <p class="post-meta">
                         Publicat el dia @post.PublishedOn!.Value.Day/@post.PublishedOn!.Value.Month/@post.PublishedOn!.Value.Year
-                        <a type="submit" href="/Post/Edit/@post.Id" class="btn btn-secondary float-end mb-4">Edit</a>
+                        <a type="submit" href="/Post/Delete/@post.Id">Delete</a>
+                        <a type="submit" href="/Post/Edit/@post.Id" class="btn btn-secondary float-end">Edit</a>
                     </p>
                 </div>
                 <hr class="my-4" />
@@ -65,7 +66,12 @@
                     pageNumber = "1";
                 }
             }
-            <!--<div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" asp-route-page="@pageNumber">Publicacions anteriors →</a></div> -->
+            @if (Model.posts.Count() - 5 * Model.Page > 0)
+            {
+                <div class="d-flex justify-content-end mb-4">
+                    <a class="btn btn-primary text-uppercase" asp-area="" asp-controller="Admin" asp-action="Index" asp-route-page="@pageNumber">Publicacions anteriors →</a>
+                </div>
+            }
         </div>
     </div>
 </div>

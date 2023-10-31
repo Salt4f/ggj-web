@@ -10,7 +10,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <img class="w-50 floating" src="/images/gamejam.png" />
+                    <img class="w-75 mb-2 pt-lg-4 floating" src="/images/gamejam23_colorized.png" />
                     <h1 style="font-family:'Chalk_Mark'">GGJ Barcelona</h1>
                     <span class="subheading">Blog oficial per a la Global GameJam BCN @@ UPC</span>
                 </div>
@@ -49,9 +49,12 @@
                     pageNumber = "1";
                 }
             }
-            <div class="d-flex justify-content-end mb-4">
-                <a class="btn btn-primary text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" asp-route-page="@pageNumber">Publicacions anteriors →</a>
-            </div>
+            @if (Model.posts.Count() - 5*Model.Page > 0)
+            {
+                <div class="d-flex justify-content-end mb-4">
+                    <a class="btn btn-primary text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" asp-route-page="@pageNumber">Publicacions anteriors →</a>
+                </div>
+            }
         </div>
     </div>
 </div>

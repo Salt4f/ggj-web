@@ -51,6 +51,26 @@ namespace GGJWeb.Controllers
             return post is null ? NotFound() : View(new NewPostBody { Title=post.Title, Subtitle=post.Subtitle, Body=post.PostInfo?.Body});
         }
 
+        public async Task<IActionResult> Delete(int? id)
+        {
+            // Return if session is not authorized
+            if ((HttpContext.Session.GetInt32("Authorized") ?? 0) == 0)
+            {
+                return RedirectToAction(nameof(AdminController.Auth), "Admin");
+            }
+
+            var post = await _context.Posts!
+                .Include(p => p.PostInfo)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (post is null || post.PostInfo is null) return NotFound();
+
+            _context.Remove(post);
+            _context.Remove(post.PostInfo);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(AdminController.Index), "Admin");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> New([Bind(nameof(NewPostBody.Title),nameof(NewPostBody.Subtitle),nameof(NewPostBody.Body))]NewPostBody info)
