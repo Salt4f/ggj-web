@@ -65,7 +65,8 @@ namespace GGJWeb.Controllers
             {
                 if (data.Password != _config.GetValue<string>("Password"))
                 {
-                    return Unauthorized();
+                    //TODO: add proper wrong password handling when migrating auth
+                    return RedirectToAction(nameof(AdminController.Auth), "Admin");
                 }
 
                 if (HttpContext.Session.IsAvailable)
@@ -95,7 +96,7 @@ namespace GGJWeb.Controllers
                 // Return if session is not authorized
                 if ((HttpContext.Session.GetInt32("Authorized") ?? 0) == 0)
                 {
-                    return Unauthorized();
+                    return RedirectToAction(nameof(AdminController.Auth), "Admin");
                 }
 
                 HomeModel homeModel;
