@@ -49,7 +49,7 @@
                     pageNumber = "1";
                 }
             }
-            @if (Model.posts.Count() - 5*Model.Page > 0)
+            @if (Model.HasNextPage)
             {
                 <div class="d-flex justify-content-end mb-4">
                     <a class="btn btn-primary text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" asp-route-page="@pageNumber">Publicacions anteriors →</a>

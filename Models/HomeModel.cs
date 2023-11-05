@@ -14,7 +14,7 @@ namespace GGJWeb.Models
 
         public DateTime JamStart { get; set; }
 
-        public int? Page { get; set; }
+        public bool HasNextPage { get; set; }
 
         public IEnumerable<Post>? posts { get; set; }
     }

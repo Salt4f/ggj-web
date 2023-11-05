@@ -30,8 +30,9 @@ namespace GGJWeb.Controllers
             {
                 homeModel = new HomeModel();
             }
-            homeModel.Page = page;
+
             homeModel.posts = await _context.Posts!.OrderByDescending(p => p.PublishedOn).Skip(page * 5).Take(5).ToListAsync();
+            homeModel.HasNextPage = _context.Posts!.Count() - 5 * (page + 1) > 0;
 
             return View(homeModel);
         }
