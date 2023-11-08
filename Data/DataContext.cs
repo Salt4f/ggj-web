@@ -1,5 +1,6 @@
 ﻿using GGJWeb.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace GGJWeb.Data
 {
@@ -19,13 +20,14 @@ namespace GGJWeb.Data
                 .UseSnakeCaseNamingConvention();
         }
 
+        public DbSet<HomeModel> Home { get; set; }
         public DbSet<Post>? Posts { get; set; }
         public DbSet<PostInfo>? PostInfos { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Post>()
-                .HasOne(p => p.PostInfo);
+            .HasOne(p => p.PostInfo);
         }
 
 

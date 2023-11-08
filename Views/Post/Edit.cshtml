@@ -1,11 +1,11 @@
 ﻿@model GGJWeb.Controllers.PostController.NewPostBody
 
 @{
-    ViewData["Title"] = "New";
+    ViewData["Title"] = "Edit";
     Layout = "_AdminPage";
 }
 
-<form asp-controller="Post" asp-action="New" method="post">
+<form asp-controller="Post" asp-action="Edit" method="post">
     <header class="masthead" style="background-image: url('/images/background.jpg');">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -27,7 +27,7 @@
         <div id="editor-container"></div>
         <textarea id="postBody" style="visibility: hidden" asp-for="Body"></textarea>
         <br />
-        <button type="submit" class="btn btn-primary">Crear post!</button>
+        <button type="submit" class="btn btn-primary">Editar post!</button>
     </div>
 </article>
 </form>
@@ -46,6 +46,9 @@
         placeholder: 'Introdueix el contingut del post...',
         theme: 'snow'  // or 'bubble'
     });
+
+    // Load body to quill editor
+    quill.root.innerHTML = postBody.value;
 
     quill.on('text-change', function() {
       postBody.value = quill.root.innerHTML;

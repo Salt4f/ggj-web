@@ -1,28 +1,43 @@
 ﻿@model HomeModel
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Admin Panel";
+    Layout = "_AdminLayout";
 }
 
-<header class="homehead">
+<header class="adminhead">
     <div id="particles-js"></div>
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <img class="w-75 mb-2 pt-lg-4 floating" src="/images/gamejam23_colorized.png" />
-                    <h1 style="font-family:'Chalk_Mark'">GGJ Barcelona</h1>
-                    <span class="subheading">Blog oficial per a la Global GameJam BCN @@ UPC</span>
+                    <h1 style="font-family:'Chalk_Mark'">Admin Mode</h1>
+
+                    <form asp-controller="Admin" asp-action="Update" method="post">
+                        <div class="mb-3">
+                            <label asp-for="JamStart" class="subheading"><strong>Data d'inici de la gamejam:</strong></label>
+                            <br />
+                            <input asp-for="JamStart" id="jamDate" class="input-dark" type="datetime-local" style="scale: 2"/>
+                            <br />
+                            <br />
+                            <label asp-for="SignupLink" class="subheading"><strong>Enllaç de registre:</strong></label>
+                            <br />
+                            <input asp-for="SignupLink" id="signupLink" class="input-dark" type="url" style="scale: 1.5"/>
+                        </div>
+                        
+                        <br />
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
                 </div>
-                <h1 id="mainCountdown" class="countdown">--:--:--</h1>
             </div>
         </div>
     </div>
 </header>
 
 <div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="row gx-4 gx-lg-5 justify-content-center align-middle">
         <div class="col-md-10 col-lg-8 col-xl-7">
+            <a type="submit" href="/Post/New" class="btn btn-primary float-end mb-4">+ Add new post</a>
             @foreach (var post in Model.posts)
             {
                 <div class="post-preview">
@@ -35,6 +50,8 @@
                     </a>
                     <p class="post-meta">
                         Publicat el dia @post.PublishedOn!.Value.Day/@post.PublishedOn!.Value.Month/@post.PublishedOn!.Value.Year
+                        <a type="submit" href="/Post/Delete/@post.Id">Delete</a>
+                        <a type="submit" href="/Post/Edit/@post.Id" class="btn btn-secondary float-end">Edit</a>
                     </p>
                 </div>
                 <hr class="my-4" />
@@ -52,17 +69,9 @@
             @if (Model.HasNextPage)
             {
                 <div class="d-flex justify-content-end mb-4">
-                    <a class="btn btn-primary text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" asp-route-page="@pageNumber">Publicacions anteriors →</a>
+                    <a class="btn btn-primary text-uppercase" asp-area="" asp-controller="Admin" asp-action="Index" asp-route-page="@pageNumber">Publicacions anteriors →</a>
                 </div>
             }
         </div>
     </div>
 </div>
-
-<script>
-    // Minus one because it's monthIndex so january is actually 0
-    const mainDate = new Date("@Model.JamStart.ToString("yyyy-MM-ddTHH:mm:ss")").getTime();
-</script>
-
-<script src="~/js/particles.js" asp-append-version="true"></script>
-<script src="~/js/countdown.js" asp-append-version="true"></script>

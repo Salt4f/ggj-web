@@ -2,6 +2,7 @@
 using GGJWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace GGJWeb.Controllers
@@ -19,8 +20,38 @@ namespace GGJWeb.Controllers
 
         public async Task<IActionResult> Index([FromQuery(Name = "page")] int page)
         {
-            var list = await _context.Posts!.OrderByDescending(p => p.PublishedOn).Skip(page * 5).Take(5).ToListAsync();
-            return View(list);
+            HomeModel homeModel;
+            
+            try
+            {
+                homeModel = await _context.Home!.FirstAsync();
+            }
+            catch (InvalidOperationException)
+            {
+                homeModel = new HomeModel();
+            }
+
+            homeModel.posts = await _context.Posts!.OrderByDescending(p => p.PublishedOn).Skip(page * 5).Take(5).ToListAsync();
+            homeModel.HasNextPage = _context.Posts!.Count() - 5 * (page + 1) > 0;
+
+            return View(homeModel);
+        }
+
+        public async Task<IActionResult> Signup()
+        {
+            HomeModel homeModel;
+
+            try
+            {
+                homeModel = await _context.Home!.FirstAsync();
+                return Redirect(homeModel.SignupLink ?? "gamejambcn.com");
+            }
+            catch (InvalidOperationException)
+            {
+                // Add error redirect
+                return Redirect("gamejambcn.com");
+            }
+
         }
 
         public IActionResult About()

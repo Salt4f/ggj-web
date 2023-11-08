@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*!
-* Start Bootstrap - Clean Blog v6.0.8 (https://startbootstrap.com/theme/clean-blog)
+* Colorful Neon Based by Plopez (https://github.com/plopez01/) based on Start Bootstrap - Clean Blog v6.0.8 (https://startbootstrap.com/theme/clean-blog)
 * Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/master/LICENSE)
 */
@@ -33,8 +33,9 @@
     --bs-gray-700: #495057;
     --bs-gray-800: #343a40;
     --bs-gray-900: #212529;
-    --bs-primary: #0085A1;
-    --bs-secondary: #6c757d;
+    --bs-primary: deeppink;
+    --bs-primary-dark: #db127f;
+    --bs-secondary: #5275f2;
     --bs-success: #198754;
     --bs-info: #0dcaf0;
     --bs-warning: #ffc107;
@@ -60,8 +61,73 @@
     --bs-body-font-size: 1rem;
     --bs-body-font-weight: 400;
     --bs-body-line-height: 1.5;
-    --bs-body-color: #212529;
-    --bs-body-bg: #fff;
+    --bs-body-color: #f4ebf5;
+    --bs-body-bg: #111122;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0em);
+    }
+
+    50% {
+        transform: translateY(-1em);
+    }
+
+    100% {
+        transform: translateY(0em);
+    }
+}
+
+.floating {
+    animation-name: float;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes alert {
+    0% {
+        color: white;
+    }
+
+    50% {
+        color: rgb(222, 44, 44);
+    }
+
+    100% {
+        color: white;
+    }
+}
+
+.alerting {
+    animation-name: alert;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    z-index: 0; /* if you use -1 you have to set to `"window"` the interactivity.detectsOn property */
+
+    display: block;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+    -webkit-transition: opacity .8s ease, -webkit-transform 1.4s ease;
+    transition: opacity .8s ease, transform 1.4s ease;
+}
+
+.countdown {
+    text-align: center;
+    font-size: 5em;
+    margin: 0;
 }
 
 *,
@@ -85,6 +151,7 @@ body {
     color: var(--bs-body-color);
     text-align: var(--bs-body-text-align);
     background-color: var(--bs-body-bg);
+    background-attachment: fixed;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -240,15 +307,29 @@ sup {
 }
 
 a {
-    color: #212529;
+    color: var(--bs-primary-dark);
     text-decoration: none;
 }
 
     a:hover {
-        color: #0085A1;
+        color: var(--bs-secondary)
     }
 
     a:not([href]):not([class]), a:not([href]):not([class]):hover {
+        color: inherit;
+        text-decoration: none;
+    }
+
+a.nav-btn {
+    color: #fff;
+    text-decoration: none;
+}
+
+    a.nav-btn:hover {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    a.nav-btn:not([href]):not([class]), a:not([href]):not([class]):hover {
         color: inherit;
         text-decoration: none;
     }
@@ -291,7 +372,7 @@ kbd {
     padding: 0.2rem 0.4rem;
     font-size: 0.875em;
     color: #fff;
-    background-color: #212529;
+    background-color: #f4ebf5;
 }
 
     kbd kbd {
@@ -358,6 +439,13 @@ textarea {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
+    font-family: Open Sans
+}
+
+.input-dark {
+    background: #2225;
+    border: none;
+    color: #eee;
 }
 
 button,
@@ -3143,9 +3231,12 @@ textarea.form-control-lg {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #0085A1;
-    border-color: #0085A1;
+    background-color: var(--bs-primary);
+    -webkit-mask-image: url("/images/Button.svg");
+    mask-image: url("/images/Button.svg");
+    mask-size: cover;
+    border: none;
+    mask-repeat: no-repeat;
 }
 
     .btn-primary:hover {
@@ -4164,10 +4255,15 @@ textarea.form-control-lg {
     list-style: none;
 }
 
+.nav-btn {
+    background-color: var(--bs-primary);
+    color: white;
+}
+
 .nav-link {
     display: block;
     padding: 0.5rem 1rem;
-    color: #212529;
+    color: #f4ebf5;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 
@@ -4311,7 +4407,7 @@ textarea.form-control-lg {
 
 .navbar-collapse {
     flex-basis: 100%;
-    flex-grow: 1;
+    /*flex-grow: 1;*/
     align-items: center;
 }
 
@@ -4738,19 +4834,19 @@ textarea.form-control-lg {
     }
 
 .navbar-light .navbar-brand {
-    color: rgba(0, 0, 0, 0.9);
+    color: #f4ebf5;
 }
 
     .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
-        color: rgba(0, 0, 0, 0.9);
+        color: rgba(255, 255, 255, 0.8);
     }
 
 .navbar-light .navbar-nav .nav-link {
-    color: rgba(0, 0, 0, 0.55);
+    color: #f4ebf5;
 }
 
     .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
-        color: rgba(0, 0, 0, 0.7);
+        color: rgba(255, 255, 255, 0.8);
     }
 
     .navbar-light .navbar-nav .nav-link.disabled {
@@ -4763,7 +4859,7 @@ textarea.form-control-lg {
     }
 
 .navbar-light .navbar-toggler {
-    color: rgba(0, 0, 0, 0.55);
+    color: #f4ebf5;
     border-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -11584,7 +11680,7 @@ body {
 
 hr {
     background-color: #dee2e6;
-    opacity: 1;
+    opacity: 0.5;
 }
 
 p {
@@ -11626,8 +11722,8 @@ blockquote {
     left: 0;
     right: 0;
     z-index: 1030;
-    border-bottom: 1px solid #dee2e6;
-    background-color: #fff;
+    border-bottom: 1px solid var(--bs-primary);
+    background-color: rgba(33, 34, 59, 0.9);
     font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
@@ -11686,24 +11782,24 @@ blockquote {
             position: fixed;
             top: -83px;
             transition: transform 0.2s;
-            border-bottom: 1px solid white;
-            background-color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid var(--bs-primary);
+            background-color: rgba(33, 34, 59, 0.9);
         }
 
             #mainNav.is-fixed .navbar-brand {
-                color: #212529;
+                color: #f4ebf5;
             }
 
                 #mainNav.is-fixed .navbar-brand:focus, #mainNav.is-fixed .navbar-brand:hover {
-                    color: #0085A1;
+                    color: rgba(255, 255, 255, 0.8);
                 }
 
             #mainNav.is-fixed .navbar-nav > li.nav-item > a {
-                color: #212529;
+                color: #f4ebf5;
             }
 
                 #mainNav.is-fixed .navbar-nav > li.nav-item > a:focus, #mainNav.is-fixed .navbar-nav > li.nav-item > a:hover {
-                    color: #0085A1;
+                    color: rgba(255, 255, 255, 0.8);
                 }
 
         #mainNav.is-visible {
@@ -11726,6 +11822,8 @@ header.masthead {
     background-color: #6c757d;
     background-size: cover;
     background-attachment: scroll;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
 }
 
     header.masthead:before {
@@ -11796,7 +11894,7 @@ header.masthead {
 
 @media (min-width: 992px) {
     header.masthead {
-        padding-top: 12.5rem;
+        padding-top: 9rem;
         padding-bottom: 12.5rem;
     }
 
@@ -11815,6 +11913,202 @@ header.masthead {
         }
 }
 
+header.homehead {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-top: calc(8rem + 57px);
+    padding-bottom: 8rem;
+    background: radial-gradient(circle, rgba(227,23,162,1) 0%, rgba(137,43,130,0.8) 16%, rgba(49,22,90,0.7) 38%, rgba(11,24,40,0.4) 75%, rgba(13,34,59,0.2) 100%);
+    mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+}
+
+    header.homehead:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #212529;
+        opacity: 0.2;
+    }
+
+    header.homehead .page-heading,
+    header.homehead .post-heading,
+    header.homehead .site-heading {
+        color: #fff;
+    }
+
+    header.homehead .page-heading,
+    header.homehead .site-heading {
+        text-align: center;
+    }
+
+        header.homehead .page-heading h1, header.homehead .page-heading .h1,
+        header.homehead .site-heading h1,
+        header.homehead .site-heading .h1 {
+            font-size: 3rem;
+        }
+
+        header.homehead .page-heading .subheading,
+        header.homehead .site-heading .subheading {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            display: block;
+            margin-top: 0.625rem;
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+    header.homehead .post-heading h1, header.homehead .post-heading .h1 {
+        font-size: 2.25rem;
+    }
+
+    header.homehead .post-heading .meta,
+    header.homehead .post-heading .subheading {
+        line-height: 1.1;
+        display: block;
+    }
+
+    header.homehead .post-heading .subheading {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0.75rem 0 2rem;
+        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    header.homehead .post-heading .meta {
+        font-size: 1.25rem;
+        font-weight: 300;
+        font-style: italic;
+        font-family: "Lora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+        header.homehead .post-heading .meta a {
+            color: #fff;
+        }
+
+@media (min-width: 992px) {
+    header.homehead {
+        padding-top: 9rem;
+        padding-bottom: 4rem;
+    }
+
+        header.homehead .page-heading h1, header.homehead .page-heading .h1,
+        header.homehead .site-heading h1,
+        header.homehead .site-heading .h1 {
+            font-size: 5rem;
+        }
+
+        header.homehead .post-heading h1, header.homehead .post-heading .h1 {
+            font-size: 3.5rem;
+        }
+
+        header.homehead .post-heading .subheading {
+            font-size: 1.875rem;
+        }
+}
+
+
+header.adminhead {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-top: calc(8rem + 57px);
+    padding-bottom: 8rem;
+    background: radial-gradient(circle, rgba(23,159,227,1) 0%, rgba(43,91,137,0.8) 16%, rgba(22,23,90,0.7) 38%, rgba(11,24,40,0.4) 75%, rgba(13,34,59,0.2) 100%);
+    mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+}
+
+    header.adminhead:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #212529;
+        opacity: 0.2;
+    }
+
+    header.adminhead .page-heading,
+    header.adminhead .post-heading,
+    header.adminhead .site-heading {
+        color: #fff;
+    }
+
+    header.adminhead .page-heading,
+    header.adminhead .site-heading {
+        text-align: center;
+    }
+
+        header.adminhead .page-heading h1, header.adminhead .page-heading .h1,
+        header.adminhead .site-heading h1,
+        header.adminhead .site-heading .h1 {
+            font-size: 3rem;
+        }
+
+        header.adminhead .page-heading .subheading,
+        header.adminhead .site-heading .subheading {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            display: block;
+            margin-top: 0.625rem;
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+    header.adminhead .post-heading h1, header.adminhead .post-heading .h1 {
+        font-size: 2.25rem;
+    }
+
+    header.adminhead .post-heading .meta,
+    header.adminhead .post-heading .subheading {
+        line-height: 1.1;
+        display: block;
+    }
+
+    header.adminhead .post-heading .subheading {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0.75rem 0 2rem;
+        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    header.adminhead .post-heading .meta {
+        font-size: 1.25rem;
+        font-weight: 300;
+        font-style: italic;
+        font-family: "Lora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+        header.adminhead .post-heading .meta a {
+            color: #fff;
+        }
+
+@media (min-width: 992px) {
+    header.adminhead {
+        padding-top: 9rem;
+        padding-bottom: 4rem;
+    }
+
+        header.adminhead .page-heading h1, header.adminhead .page-heading .h1,
+        header.adminhead .site-heading h1,
+        header.adminhead .site-heading .h1 {
+            font-size: 5rem;
+        }
+
+        header.adminhead .post-heading h1, header.adminhead .post-heading .h1 {
+            font-size: 3.5rem;
+        }
+
+        header.adminhead .post-heading .subheading {
+            font-size: 1.875rem;
+        }
+}
+
+
 .section-heading {
     font-size: 2.25rem;
     font-weight: 700;
@@ -11831,12 +12125,12 @@ header.masthead {
 }
 
 .post-preview > a {
-    color: #212529;
+    color: #d4a9cd;
 }
 
     .post-preview > a:focus, .post-preview > a:hover {
         text-decoration: none;
-        color: #0085A1;
+        color: rgba(180, 178, 214, 0.8);
     }
 
     .post-preview > a > .post-title {
