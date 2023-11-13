@@ -126,8 +126,21 @@
 
 .countdown {
     text-align: center;
-    font-size: 5em;
+    font-size: 2em;
     margin: 0;
+
+    /* Small devices (tablets, 768px and up) */
+    @media (min-width: 768px) {
+        font-size: 3em;
+    }
+    /* Medium devices (desktops, 992px and up) */
+    @media (min-width: 992px) {
+        font-size: 4em;
+    }
+    /* Large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {
+        font-size: 5em;
+    }
 }
 
 *,
@@ -4258,6 +4271,10 @@ textarea.form-control-lg {
 .nav-btn {
     background-color: var(--bs-primary);
     color: white;
+
+    @media(max-width: 370px) {
+        font-size: 0.7rem;
+    }
 }
 
 .nav-link {
@@ -4379,8 +4396,12 @@ textarea.form-control-lg {
     padding-top: 0.3125rem;
     padding-bottom: 0.3125rem;
     margin-right: 1rem;
-    font-size: 1.25rem;
+    font-size: 0.80rem;
     white-space: nowrap;
+
+    @media (min-width: 425px) {
+        font-size: 1.25rem;
+    }
 }
 
 .navbar-nav {

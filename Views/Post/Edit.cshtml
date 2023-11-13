@@ -32,26 +32,4 @@
 </article>
 </form>
 
-<script>
-    var postBody = document.querySelector("#postBody");
-
-    var quill = new Quill('#editor-container', {
-        modules: {
-            toolbar: [
-                [{ header: [1, 2, false] }],
-                ['bold', 'italic', 'underline'],
-                ['image', 'code-block']
-            ]
-        },
-        placeholder: 'Introdueix el contingut del post...',
-        theme: 'snow'  // or 'bubble'
-    });
-
-    // Load body to quill editor
-    quill.root.innerHTML = postBody.value;
-
-    quill.on('text-change', function() {
-      postBody.value = quill.root.innerHTML;
-
-    });
-</script>
+<script src="~/js/postEditor.js" asp-append-version="true"></script>
