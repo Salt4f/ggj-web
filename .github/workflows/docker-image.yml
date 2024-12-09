@@ -20,10 +20,10 @@ jobs:
       
     - name: Push image
       run: |
-        docker push vgafib/web-ggj:${{ github.event.number }}
-        docker image tag vgafib/web-ggj:${{ github.event.number }} vgafib/web-ggj:latest
+        docker push vgafib/web-ggj:${{ github.sha }}
+        docker image tag vgafib/web-ggj:${{ github.sha }} vgafib/web-ggj:latest
         docker push vgafib/web-ggj:latest
         
     - name: Cleanup
-      run: docker rmi vgafib/web-ggj:${{ github.event.number }} vgafib/web-ggj:latest
+      run: docker rmi vgafib/web-ggj:${{ github.sha }} vgafib/web-ggj:latest
         
